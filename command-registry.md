@@ -9,9 +9,8 @@ This document contains an informative list of Command Codes defined by OCP speci
 | Command Code | Command Name             | Defining Specification                             | Description                                                        |
 | :----------- | :----------------------- | :------------------------------------------------- | :----------------------------------------------------------------  |
 | 0x00         | Reserved                 | -                                                  | Reserved for future use                                            |
-| 0x01         | GET_ENVELOPE_SIGNED_CSR  | [OCP Device Identity Provisioning](https://github.com/opencomputeproject/Security/blob/main/specifications/device-identity-provisioning/README.md)                    | Requests a replay-protected CSR envelope-signed by attestation key |
-| 0x02         | GET_EAT                  | [OCP Profile for IETF Entity Attestation Token](https://github.com/opencomputeproject/Security/blob/main/specifications/ietf-eat-profile/README.md)      | Requests an Entity Attestation Token conforming to OCP Profile    |
-| 0x03-0xFF    | Reserved                 | -                                                  | Reserved for future assignment                                     |
+| 0x01-0x20    | Caliptra VDM Commands    | [Caliptra VDM Commands](https://github.com/chipsalliance/caliptra-mcu-sw/blob/main/docs/src/external_mctp_vdm_cmds.md) (OCP Vendor ID: 42623) | Caliptra-defined commands using SPDM Vendor Defined Messages with OCP Vendor ID |
+| 0x21-0xFF    | Reserved                 | -                                                  | Reserved for future assignment                                     |
 
 ## Command Assignment Process
 
@@ -22,17 +21,19 @@ New OCP specifications that require command codes **MUST**:
 3. Reference the defining specification
 4. Update this registry upon approval
 
-## Cross-Specification References
+## Reserved Command Range Governance
 
-### GET_ENVELOPE_SIGNED_CSR (0x01)
-- **Defined in:** OCP Device Identity Provisioning Specification
-- **Purpose:** Requests a freshness-protected (replay-resistant) Certificate Signing Request that is envelope-signed by an attestation key to establish trust in a device's identity keypair
-- **Reference:** See Device Identity Provisioning specification for full command definition
+### Caliptra VDM Commands (0x01-0x20)
 
-### GET_EAT (0x02)
-- **Defined in:** OCP Profile for IETF Entity Attestation Token Specification
-- **Purpose:** Retrieves attestation evidence in OCP EAT format
-- **Reference:** See OCP EAT Profile specification for full command definition
+The command range 0x01–0x20 is reserved in this OCP registry and assigned to the Caliptra Working Group. From a governance perspective, these are **not** OCP-defined commands. OCP only reserves the command range in its registry and assigns it to Caliptra. The Caliptra Working Group retains full ownership of the definition, specification, and implementation of all commands within this range.
+
+Accordingly, commands in this range are treated as **Caliptra-defined commands using SPDM Vendor Defined Messages with the OCP-assigned Vendor ID (42623)**, ensuring clear ownership and normative authority while leveraging the OCP registry as a shared namespace.
+
+- **Assigned to:** Caliptra Working Group
+- **Vendor ID:** OCP (42623)
+- **Normative Authority:** Caliptra Working Group
+- **Reference:** See [Caliptra VDM Commands](https://github.com/chipsalliance/caliptra-mcu-sw/blob/main/docs/src/external_mctp_vdm_cmds.md) for the full list of command definitions
+
 
 ## Error Code Registry
 
